@@ -27,20 +27,6 @@ def calculate_delta_c(output1, output2):
     return [[xor(output1[j], output2[i][j]) for j in range(16)] for i in range(16)]
 
 
-input2 = calculate_input2(input1, deltaA)
-output1_S1 = output_calculation_after_table_2x8(input1, S1)
-output2_S1 = [output_calculation_after_table_2x8(input2[i], S1) for i in range(16)]
-deltaC_S1 = calculate_delta_c(output1_S1, output2_S1)
-
-output1_S2 = output_calculation_after_table_2x8(input1, S2)
-output2_S2 = [output_calculation_after_table_2x8(input2[i], S2) for i in range(16)]
-deltaC_S2 = calculate_delta_c(output1_S2, output2_S2)
-
-output1_S3 = output_calculation_after_table_4x4(input1, S3)
-output2_S3 = [output_calculation_after_table_4x4(input2[i], S3) for i in range(16)]
-deltaC_S3 = calculate_delta_c(output1_S3, output2_S3)
-
-
 def beautiful_output_in_the_console(input1, input2, output1, output2, deltaC):
     for i in range(16):
         print('Таблица №' + str(i+1))
@@ -58,19 +44,36 @@ def beautiful_output_in_the_console(input1, input2, output1, output2, deltaC):
         print('-' * 74)
         print('\n')
 
-print('S1 Table')
-beautiful_output_in_the_console(input1, input2, output1_S1, output2_S1, deltaC_S1)
-print('S2 Table')
-beautiful_output_in_the_console(input1, input2, output1_S2, output2_S2, deltaC_S2)
-print('S3 Table')
-beautiful_output_in_the_console(input1, input2, output1_S3, output2_S3, deltaC_S3)
-# print(deltaC[1])
-# the_number_of_occurrences = [{} for i in range(16)]
-# print(the_number_of_occurrences)
-# for i in range(16):
-#     for n in deltaC[i]:
-#         if n in the_number_of_occurrences[i].keys():
-#             the_number_of_occurrences[i][n] += 1
-#         else:
-#             the_number_of_occurrences[i][n] = 1
-#     print(the_number_of_occurrences[i])
+
+def probability(deltaC):
+    the_number_of_occurrences = [{} for i in range(16)]
+    for i in range(16):
+        for n in deltaC[i]:
+            if n in the_number_of_occurrences[i].keys():
+                the_number_of_occurrences[i][n] += 1
+            else:
+                the_number_of_occurrences[i][n] = 1
+    return the_number_of_occurrences
+
+
+input2 = calculate_input2(input1, deltaA)
+output1_S1 = output_calculation_after_table_2x8(input1, S1)
+output2_S1 = [output_calculation_after_table_2x8(input2[i], S1) for i in range(16)]
+deltaC_S1 = calculate_delta_c(output1_S1, output2_S1)
+
+output1_S2 = output_calculation_after_table_2x8(input1, S2)
+output2_S2 = [output_calculation_after_table_2x8(input2[i], S2) for i in range(16)]
+deltaC_S2 = calculate_delta_c(output1_S2, output2_S2)
+
+output1_S3 = output_calculation_after_table_4x4(input1, S3)
+output2_S3 = [output_calculation_after_table_4x4(input2[i], S3) for i in range(16)]
+deltaC_S3 = calculate_delta_c(output1_S3, output2_S3)
+
+
+# print('S1 Table')
+# beautiful_output_in_the_console(input1, input2, output1_S1, output2_S1, deltaC_S1)
+# print('S2 Table')
+# beautiful_output_in_the_console(input1, input2, output1_S2, output2_S2, deltaC_S2)
+# print('S3 Table')
+# beautiful_output_in_the_console(input1, input2, output1_S3, output2_S3, deltaC_S3)
+# print(probability(deltaC_S1))
