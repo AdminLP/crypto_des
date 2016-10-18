@@ -56,6 +56,28 @@ def probability(deltaC):
     return the_number_of_occurrences
 
 
+def output_probability_in_the_console(probability_list):
+    print('dA\dC\t' + '|' + '\t'.join(int2bin(n, 3) for n in range(8)))
+    print('-' * 66)
+    for i in range(16):
+        print(int2bin(i) + '\t' + '|' + '\t'.join(str(n) for n in [probability_list[i].get(j, 0) for j in range(8)]))
+    print('\n')
+
+
+def main_output_console():
+    print('S1 Table')
+    beautiful_output_in_the_console(input1, input2, output1_S1, output2_S1, deltaC_S1)
+    print('S2 Table')
+    beautiful_output_in_the_console(input1, input2, output1_S2, output2_S2, deltaC_S2)
+    print('S3 Table')
+    beautiful_output_in_the_console(input1, input2, output1_S3, output2_S3, deltaC_S3)
+    print('Probability S1 Table')
+    output_probability_in_the_console(probability_S1)
+    print('Probability S2 Table')
+    output_probability_in_the_console(probability_S2)
+    print('Probability S3 Table')
+    output_probability_in_the_console(probability_S3)
+
 input2 = calculate_input2(input1, deltaA)
 output1_S1 = output_calculation_after_table_2x8(input1, S1)
 output2_S1 = [output_calculation_after_table_2x8(input2[i], S1) for i in range(16)]
@@ -68,12 +90,9 @@ deltaC_S2 = calculate_delta_c(output1_S2, output2_S2)
 output1_S3 = output_calculation_after_table_4x4(input1, S3)
 output2_S3 = [output_calculation_after_table_4x4(input2[i], S3) for i in range(16)]
 deltaC_S3 = calculate_delta_c(output1_S3, output2_S3)
+probability_S1 = probability(deltaC_S1)
+probability_S2 = probability(deltaC_S2)
+probability_S3 = probability(deltaC_S3)
 
 
-# print('S1 Table')
-# beautiful_output_in_the_console(input1, input2, output1_S1, output2_S1, deltaC_S1)
-# print('S2 Table')
-# beautiful_output_in_the_console(input1, input2, output1_S2, output2_S2, deltaC_S2)
-# print('S3 Table')
-# beautiful_output_in_the_console(input1, input2, output1_S3, output2_S3, deltaC_S3)
-# print(probability(deltaC_S1))
+main_output_console()
