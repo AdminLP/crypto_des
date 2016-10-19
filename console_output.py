@@ -24,11 +24,11 @@ def beautiful_output_in_the_console(input1, input2, output1, output2, deltaC):
         print('\n')
 
 
-def output_probability_in_the_console(probability_list):
-    print('dA\dC\t' + '|' + '\t'.join(int2bin(n, 3) for n in range(8)))
+def output_probability_in_the_console(probability_list, j, k):
+    print('dA\dC\t' + '|' + '\t'.join(int2bin(n, j) for n in range(k)))
     print('-' * 66)
     for i in range(16):
-        print(int2bin(i) + '\t' + '|' + '\t'.join(str(n) for n in [probability_list[i].get(j, 0) for j in range(8)]))
+        print(int2bin(i) + '\t' + '|' + '\t'.join(str(n) for n in [probability_list[i].get(j, 0) for j in range(k)]))
     print('\n')
 
 
@@ -40,8 +40,8 @@ def main_output_console():
     print('S3 Table')
     beautiful_output_in_the_console(input1, input2, output1_S3, output2_S3, deltaC_S3)
     print('Probability S1 Table')
-    output_probability_in_the_console(probability_S1)
+    output_probability_in_the_console(probability_S1, 3, 8)
     print('Probability S2 Table')
-    output_probability_in_the_console(probability_S2)
+    output_probability_in_the_console(probability_S2, 3, 8)
     print('Probability S3 Table')
-    output_probability_in_the_console(probability_S3)
+    output_probability_in_the_console(probability_S3, 2, 4)
